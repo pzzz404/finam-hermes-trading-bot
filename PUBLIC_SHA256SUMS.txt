@@ -1,7 +1,7 @@
 45ff0d278e167237145af65e0ac197ce06a7fa9e29fd8a272bcec24a883b489a  ./.env.example
 8b455cd58add4776a564ff23a02cb7e00481299838b493244505818e68f0c5a5  ./.github/REPOSITORY_METADATA.md
 c5d9cdc38cae054819e3ebc37071aafab3635a214628f6fa971fb74a87a9e3af  ./.github/dependabot.yml
-4415f6d7a7a44b56e59a38452e3090f1fcfcd8f7cd9b4c236c0c6bae65df5ee1  ./.github/workflows/ci.yml
+40e9d0268e2bef05e90954d8ac6a70363f9f54fc728bc23da5aad253a74a5e01  ./.github/workflows/ci.yml
 096f4b31fdb51c563267fd564d49f74c2866ba95f03b3838ade47de59aba1954  ./.github/workflows/codeql.yml
 817358b6670f80c463f0e6e849b8adf8432f63e46a1717b1d6c696085aadf5c4  ./.gitignore
 d8eacd6e7b21f5c1af7b28b00a4b5a95ffa1122cacd6c73e863724a53d0bd922  ./AGENTS.md
