@@ -1,0 +1,12 @@
+[Unit]
+Description=Run Finam Arena guarded daily growth loop before executor
+Documentation=https://github.com/pzzz404/finam-hermes-trading-bot
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 09:45:00 Europe/Moscow
+Persistent=false
+RandomizedDelaySec=30s
+Unit=finam-arena-growth-loop.service
+
+[Install]
+WantedBy=timers.target

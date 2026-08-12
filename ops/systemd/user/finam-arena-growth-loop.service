@@ -1,0 +1,12 @@
+[Unit]
+Description=Finam Arena guarded daily growth loop
+Documentation=https://github.com/pzzz404/finam-hermes-trading-bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/finam-hermes-trading-bot
+Environment=TRADING_MODE=paper
+EnvironmentFile=-%h/.config/finam-hermes-trading-bot/runtime.env
+ExecStart=%h/finam-hermes-trading-bot/.venv/bin/python scripts/hermes_operator.py arena-growth-loop --dry-run --daily --max-reviews 3

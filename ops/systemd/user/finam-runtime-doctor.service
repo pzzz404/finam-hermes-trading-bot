@@ -1,0 +1,14 @@
+[Unit]
+Description=Finam trading runtime doctor
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/finam-hermes-trading-bot
+Environment=TRADING_MODE=paper
+EnvironmentFile=-%h/.config/finam-hermes-trading-bot/runtime.env
+ExecStart=%h/finam-hermes-trading-bot/.venv/bin/python -m finam_trading_bot doctor --json
+StandardOutput=journal
+StandardError=journal
+TimeoutStartSec=90

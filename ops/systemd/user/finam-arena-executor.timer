@@ -1,0 +1,12 @@
+[Unit]
+Description=Run Finam Arena guarded executor on H1/H30 checkpoints
+Documentation=https://github.com/pzzz404/finam-hermes-trading-bot
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 10..23:07:00 Europe/Moscow
+OnCalendar=Mon..Fri *-*-* 10..23:37:00 Europe/Moscow
+Persistent=false
+Unit=finam-arena-executor.service
+
+[Install]
+WantedBy=timers.target

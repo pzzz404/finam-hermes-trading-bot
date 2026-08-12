@@ -1,0 +1,12 @@
+[Unit]
+Description=Run Finam H4 autonomous demo guarded executor after H4 reports
+Documentation=https://github.com/pzzz404/finam-hermes-trading-bot
+
+[Timer]
+OnCalendar=*-*-* 10,14,18,22:05:00
+Timezone=Europe/Moscow
+Persistent=true
+Unit=finam-h4-autonomous-demo.service
+
+[Install]
+WantedBy=timers.target

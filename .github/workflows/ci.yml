@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - run: python tools/release_gate.py .
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e '.[dev,charts]'
+      - run: ruff check .
+      - run: pytest --disable-socket -q
+        env:
+          TRADING_MODE: paper
+      - run: python -m finam_trading_bot doctor --json
+        env:
+          TRADING_MODE: paper
+      - run: python -m finam_trading_bot paper-demo --json
+        env:
+          TRADING_MODE: paper
+      - run: python -m build
+      - run: python -m pip_audit
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Version verified locally with a positive canary and both tree/history scans.
+          GITLEAKS_VERSION: 8.27.2

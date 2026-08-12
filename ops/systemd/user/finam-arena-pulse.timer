@@ -1,0 +1,12 @@
+[Unit]
+Description=Send Finam Arena Pulse checkpoints
+Documentation=https://github.com/pzzz404/finam-hermes-trading-bot
+
+[Timer]
+OnCalendar=*-*-* 10,14,18,22:12:00 Europe/Moscow
+RandomizedDelaySec=20s
+Persistent=true
+Unit=finam-arena-pulse.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Finam Arena Pulse read-only checkpoint
+Documentation=https://github.com/pzzz404/finam-hermes-trading-bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/finam-hermes-trading-bot
+Environment=TRADING_MODE=paper
+EnvironmentFile=-%h/.config/finam-hermes-trading-bot/runtime.env
+ExecStart=%h/finam-hermes-trading-bot/.venv/bin/python scripts/arena_monitor_notify.py --once --read-only --dry-run

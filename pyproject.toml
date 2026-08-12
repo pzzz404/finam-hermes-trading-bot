@@ -1,0 +1,47 @@
+[project]
+name = "finam-hermes-trading-bot"
+version = "0.1.0"
+description = "Public artifact of a two-month Finam Arena AI-trading experiment with risk controls and guarded execution"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "pzzz404" }]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/pzzz404/finam-hermes-trading-bot"
+Issues = "https://github.com/pzzz404/finam-hermes-trading-bot/issues"
+Background = "https://www.finam.ru/publications/item/bitva-algoritmov-zachem-treydery-testiruyut-ii-na-finam-arene-20260627-2040/"
+
+[project.scripts]
+finam-trading-bot = "finam_trading_bot.__main__:main"
+
+[project.optional-dependencies]
+charts = [
+    "Pillow>=10,<13",
+]
+dev = [
+    "pytest>=9.0.3,<10",
+    "pytest-socket>=0.7,<1",
+    "ruff>=0.12,<1",
+    "build>=1.2,<2",
+    "pip-audit>=2.9,<3",
+]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 140
+
+[tool.ruff.lint]
+select = ["E9", "F63", "F7", "F82"]

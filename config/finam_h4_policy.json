@@ -1,0 +1,113 @@
+{
+  "mode": "supervised",
+  "trading_mode": "paper",
+  "account_id": "DEMO-ACCOUNT",
+  "schedule_msk": [
+    "10:00",
+    "14:00",
+    "18:00",
+    "22:00"
+  ],
+  "risk": {
+    "risk_per_trade_pct": "1.0",
+    "atr_period": 14,
+    "stop_atr_multiplier": 2.7,
+    "take_profit_r": "2",
+    "min_target_r": "1.5",
+    "max_total_open_risk_pct": "3.0",
+    "max_open_positions": 5,
+    "max_new_trades_per_run": 1
+  },
+  "permissions": {
+    "protective_stops_auto": false,
+    "new_buys_require_telegram_confirmation": true,
+    "manual_sells_require_confirmation": true,
+    "shorts_require_separate_confirmation": true,
+    "second_tier_requires_confirmation": true,
+    "unknown_target_requires_confirmation": true,
+    "incomplete_candidate_blocks_trade": true,
+    "propose_only_when_manual_confirmation_required": true
+  },
+  "universe": [
+    "SBER@MISX",
+    "GAZP@MISX",
+    "LKOH@MISX",
+    "ROSN@MISX",
+    "TATN@MISX",
+    "MOEX@MISX",
+    "PLZL@MISX",
+    "MTSS@MISX",
+    "CHMF@MISX",
+    "SNGSP@MISX",
+    "NVTK@MISX",
+    "GMKN@MISX",
+    "RNFP@MISX",
+    "DOMRF@MISX"
+  ],
+  "dynamic_universe": {
+    "enabled": false,
+    "boards": [
+      "TQBR"
+    ],
+    "max_scan_symbols": 80,
+    "max_dynamic_candidates": 8,
+    "max_research_symbols": 2,
+    "min_daily_turnover_rub": 100000000,
+    "min_trades_today": 500,
+    "min_price_rub": 5,
+    "require_finam_longable": true,
+    "dynamic_candidates_require_confirmation": true,
+    "auto_add_to_static_universe": false,
+    "openrouter_budget_policy": "no_increase_h4_default"
+  },
+  "research": {
+    "enabled": false,
+    "provider": "codex_review",
+    "model": "openai-codex",
+    "h4_model": "perplexity/sonar",
+    "pretrade_model": "perplexity/sonar-pro",
+    "daily_model": "perplexity/sonar-pro",
+    "weekly_model": "perplexity/sonar-pro",
+    "timeout_seconds": 20,
+    "max_candidates": 1,
+    "context_max_bytes": 4096,
+    "codex_review_ttl_minutes": 240,
+    "recent_outcomes_limit": 5,
+    "rss_flags_limit": 5,
+    "review_dir": "data/runtime/codex_reviews",
+    "run_for_blocked_candidates": false,
+    "h4_max_candidates": 2,
+    "h4_max_tokens": 350,
+    "h4_cache_ttl_seconds": 1800,
+    "daily_max_tokens": 1000,
+    "weekly_max_tokens": 1600,
+    "pretrade_max_tokens": 800,
+    "daily_max_symbols": 12,
+    "weekly_max_symbols": 24,
+    "finam_rss_enabled": true,
+    "finam_rss_url": "https://www.finam.ru/analysis/conews/rsspoint/",
+    "failure_policy": {
+      "supervised": "show_candidate_and_require_manual_confirmation",
+      "autonomous_demo": "retry_then_fallback_then_reduced_risk",
+      "allow_reduced_risk_trade_if_research_unavailable": false,
+      "reduced_risk_per_trade_pct": "0.5",
+      "reduced_risk_max_trades_per_day": 1,
+      "explicit_avoid_blocks_trade": true,
+      "research_unavailable_requires_confirmation": true
+    }
+  },
+  "growth_mode": {
+    "enabled": false,
+    "report_only": true,
+    "target_annual_return": "0.5",
+    "stretch_annual_return": "1.0",
+    "min_growth_score_for_buy": 75,
+    "min_growth_score_for_watch": 60,
+    "max_new_trades_per_run": 1,
+    "max_open_positions": 5,
+    "risk_per_trade_pct": "1.0",
+    "allow_second_tier": false,
+    "allow_short_analysis": true,
+    "allow_short_orders": false
+  }
+}

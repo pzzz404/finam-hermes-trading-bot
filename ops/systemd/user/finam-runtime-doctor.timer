@@ -1,0 +1,12 @@
+[Unit]
+Description=Run Finam trading runtime doctor before H4 report checkpoints
+Documentation=https://github.com/pzzz404/finam-hermes-trading-bot
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 06,10,14,18:55:00
+AccuracySec=1min
+Persistent=true
+Unit=finam-runtime-doctor.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,513 @@
+{
+  "mode": "approval",
+  "emergency_stop": true,
+  "base_url": "https://arena.finam.ru",
+  "base_url_env": "FINAM_ARENA_BASE_URL",
+  "approval_until": null,
+  "approval_until_env": "FINAM_ARENA_APPROVAL_UNTIL",
+  "auto_trade_env": "FINAM_ARENA_AUTO_TRADE_ENABLED",
+  "session_secret_env": "FINAM_ARENA_API",
+  "accounts": [
+    {
+      "account_id": "DEMO-RU",
+      "label": "РФ",
+      "strategy": "russian_equities_h1_h4",
+      "markets": [
+        "MISX"
+      ],
+      "universe": [
+        "SBER@MISX",
+        "GAZP@MISX",
+        "LKOH@MISX",
+        "TATN@MISX",
+        "MOEX@MISX",
+        "PLZL@MISX",
+        "ROSN@MISX",
+        "NVTK@MISX",
+        "GMKN@MISX",
+        "SNGS@MISX",
+        "SNGSP@MISX",
+        "VTBR@MISX",
+        "ALRS@MISX",
+        "RUAL@MISX",
+        "CHMF@MISX",
+        "NLMK@MISX",
+        "MAGN@MISX",
+        "MTSS@MISX",
+        "MGNT@MISX",
+        "X5@MISX",
+        "AFLT@MISX",
+        "IRAO@MISX",
+        "HYDR@MISX",
+        "FEES@MISX",
+        "PHOR@MISX",
+        "TRNFP@MISX",
+        "SIBN@MISX",
+        "FLOT@MISX",
+        "POSI@MISX",
+        "VKCO@MISX"
+      ],
+      "allow_long": true,
+      "allow_short": false,
+      "paused": true,
+      "trade_mode": "manual",
+      "risk_multiplier": "1.0",
+      "primary_entries_per_day": 2,
+      "replacement_entries_per_day": 1,
+      "experimental": false
+    },
+    {
+      "account_id": "DEMO-US",
+      "label": "США",
+      "strategy": "us_equities_h1_h4",
+      "markets": [
+        "XNGS",
+        "XNYS",
+        "XNMS",
+        "XNCM",
+        "XASE",
+        "PINX"
+      ],
+      "universe": [
+        "ISRG@XNGS",
+        "KO@XNYS",
+        "MCD@XNYS",
+        "AAPL@XNGS",
+        "MSFT@XNGS",
+        "NVDA@XNGS",
+        "TSLA@XNGS",
+        "AMZN@XNGS",
+        "META@XNGS",
+        "GOOGL@XNGS",
+        "AVGO@XNGS",
+        "AMD@XNGS",
+        "NFLX@XNGS",
+        "QQQ@XNMS",
+        "ORCL@XNYS",
+        "CRM@XNYS",
+        "NOW@XNYS",
+        "PLTR@XNGS",
+        "MU@XNGS",
+        "ASML@XNGS",
+        "TSM@XNYS",
+        "SMCI@XNGS",
+        "COST@XNGS",
+        "JPM@XNYS",
+        "V@XNYS",
+        "MA@XNYS",
+        "UNH@XNYS",
+        "XOM@XNYS",
+        "LLY@XNYS",
+        "MRK@XNYS",
+        "BA@XNYS",
+        "GE@XNYS",
+        "CAT@XNYS"
+      ],
+      "allow_long": true,
+      "allow_short": false,
+      "paused": true,
+      "trade_mode": "manual",
+      "risk_multiplier": "1.0",
+      "primary_entries_per_day": 2,
+      "replacement_entries_per_day": 1,
+      "experimental": false
+    },
+    {
+      "account_id": "DEMO-AI",
+      "label": "AI",
+      "strategy": "experimental_ai_cross_market",
+      "markets": [
+        "MISX",
+        "XNGS",
+        "XNYS",
+        "XNMS",
+        "XNCM",
+        "XASE",
+        "PINX"
+      ],
+      "universe": [
+        "ISRG@XNGS",
+        "KO@XNYS",
+        "MCD@XNYS",
+        "SBER@MISX",
+        "LKOH@MISX",
+        "MOEX@MISX",
+        "PLZL@MISX",
+        "ROSN@MISX",
+        "NVTK@MISX",
+        "GMKN@MISX",
+        "PHOR@MISX",
+        "MTSS@MISX",
+        "SNGSP@MISX",
+        "RUAL@MISX",
+        "IRAO@MISX",
+        "AAPL@XNGS",
+        "MSFT@XNGS",
+        "NVDA@XNGS",
+        "META@XNGS",
+        "GOOGL@XNGS",
+        "AMZN@XNGS",
+        "AVGO@XNGS",
+        "AMD@XNGS",
+        "TSLA@XNGS",
+        "QQQ@XNMS",
+        "PLTR@XNGS",
+        "ORCL@XNYS",
+        "TSM@XNYS",
+        "ASML@XNGS",
+        "MU@XNGS",
+        "LLY@XNYS",
+        "JPM@XNYS",
+        "XOM@XNYS"
+      ],
+      "allow_long": true,
+      "allow_short": false,
+      "paused": true,
+      "trade_mode": "manual",
+      "risk_multiplier": "1.0",
+      "experimental": true
+    }
+  ],
+  "risk": {
+    "profile": "aggressive_controlled",
+    "starting_equity": "1000000",
+    "risk_per_trade_pct": "1.0",
+    "max_position_notional_pct": "25.0",
+    "stop_atr_multiplier": "2.0",
+    "take_profit_r": "2.0",
+    "max_daily_loss_pct": "3.0",
+    "max_account_drawdown_pct": "8.0",
+    "max_open_risk_pct": "5.0",
+    "max_open_positions": 8,
+    "max_new_trades_per_account_per_run": 1,
+    "max_account_gross_exposure_pct": "75.0",
+    "max_symbol_exposure_pct": "25.0",
+    "max_new_notional_pct_per_day": "25.0",
+    "max_new_trades_per_account_per_day": 1,
+    "exceptional_entry_limit_overrides": {
+      "DEMO-US": {
+        "enabled": true,
+        "min_score": 86,
+        "max_primary_entries_per_day": 2,
+        "max_new_notional_pct_per_day": "50.0",
+        "allowed_limit_gates": [
+          "daily_new_notional_limit_exceeded",
+          "primary_daily_limit_reached"
+        ],
+        "forbidden_gates": [
+          "account_gross_exposure_limit_reached",
+          "symbol_exposure_limit_exceeded",
+          "same_symbol_position_open",
+          "same_symbol_trade_today",
+          "research_unavailable_below_exceptional_score",
+          "cross_market_role_misx_concentration"
+        ]
+      },
+      "DEMO-AI": {
+        "enabled": true,
+        "min_score": 89,
+        "research_ok_min_score": 85,
+        "max_primary_entries_per_day": 2,
+        "max_new_notional_pct_per_day": "50.0",
+        "allowed_limit_gates": [
+          "daily_new_notional_limit_exceeded",
+          "primary_daily_limit_reached"
+        ],
+        "forbidden_gates": [
+          "account_gross_exposure_limit_reached",
+          "symbol_exposure_limit_exceeded",
+          "same_symbol_position_open",
+          "same_symbol_trade_today",
+          "research_unavailable_below_exceptional_score",
+          "cross_market_role_misx_concentration"
+        ]
+      }
+    },
+    "max_daily_operations_per_account": 200,
+    "allow_same_symbol_scale_in": false,
+    "mcp_confirmed_entry": {
+      "enabled": true,
+      "min_score": 79,
+      "max_score": 83,
+      "requires_mcp": true,
+      "requires_research_ok": true,
+      "risk_per_trade_pct": "0.35",
+      "max_position_notional_pct": "12.5",
+      "max_entries_per_account_per_day": 2,
+      "max_new_notional_pct_per_day": "37.5",
+      "allowed_removed_gates": [
+        "candidate_score_below_min",
+        "daily_new_notional_limit_exceeded",
+        "primary_daily_limit_reached"
+      ],
+      "forbidden_gates": [
+        "account_gross_exposure_limit_reached",
+        "symbol_exposure_limit_exceeded",
+        "same_symbol_position_open",
+        "same_symbol_trade_today",
+        "research_unavailable_below_exceptional_score",
+        "entry_strength_confirmation_missing",
+        "market_data_degraded_429",
+        "cross_market_role_misx_concentration",
+        "single_symbol_anchor_rotation_candidate"
+      ]
+    },
+    "hard_halts": [
+      "daily_loss",
+      "account_drawdown",
+      "unresolved_order_state",
+      "missing_protective_stop",
+      "open_risk_limit",
+      "api_degradation",
+      "research_provider_failure"
+    ]
+  },
+  "fees": {
+    "commission_pct_per_side": "0.035",
+    "commission_pct_by_mic": {
+      "MISX": "0.035",
+      "RUSX": "0.035",
+      "RTSX": "0.001",
+      "PINX": "0.1",
+      "XASE": "0.1",
+      "XCME": "0.1",
+      "XNCM": "0.1",
+      "XNGS": "0.1",
+      "XNMS": "0.1",
+      "XNYM": "0.1",
+      "XNYS": "0.1"
+    },
+    "slippage_pct_per_side": "0.0",
+    "source": "finam_arena_commission_grid"
+  },
+  "portfolio": {
+    "min_cash_buffer_pct": "10.0",
+    "replacement_min_score_delta": 20,
+    "replacement_min_edge_after_cost_pct": "0.10",
+    "breakeven_at_r": "1.0",
+    "trail_at_r": "1.5",
+    "take_partial_at_r": "2.0",
+    "take_partial_fraction_pct": "50.0",
+    "autonomy_mode": "full_rotation",
+    "target_gross_exposure_pct": "65.0",
+    "max_gross_exposure_pct": "75.0",
+    "deleveraging_step_pct": "25.0",
+    "max_rotation_actions_per_account_per_run": 1,
+    "max_rotation_actions_per_account_per_day": 4,
+    "min_candidate_score_for_buy": 75,
+    "min_replacement_score_delta": 15,
+    "min_replacement_edge_after_cost_pct": "0.30",
+    "min_hold_minutes_before_rotation": 120,
+    "weak_exit_min_hold_minutes": 120,
+    "weak_exit_negative_r_threshold": "-0.25",
+    "weak_exit_noise_buffer_pct": "0.10",
+    "weak_exit_immediate_score_threshold": 35,
+    "weak_exit_min_mae_samples": 30,
+    "weak_exit_threshold_source": "provisional_hysteresis_v1",
+    "block_new_entries_when_over_target_gross": true,
+    "opportunity_min_score": 75,
+    "opportunity_hold_cash_score": 60,
+    "opportunity_exceptional_base_score": 84,
+    "opportunity_reserve_until_msk": "19:00",
+    "opportunity_max_quote_age_seconds": 60,
+    "opportunity_max_replacement_turnover_cost_pct": "0.50",
+    "event_overheated_gap_pct": "5.0",
+    "event_min_rr_after_gap": "1.5",
+    "min_candidate_score_for_buy_by_account": {
+      "DEMO-RU": 75,
+      "DEMO-US": 80,
+      "DEMO-AI": 80
+    },
+    "account_role_gates": {
+      "DEMO-RU": {
+        "single_symbol_anchor_rotation": {
+          "enabled": true,
+          "market": "MISX",
+          "anchor_notional_pct": "45.0",
+          "required_progress_r": "1.0",
+          "candidate_min_score": 80,
+          "min_score_delta": 15
+        }
+      },
+      "DEMO-AI": {
+        "cross_market_concentration": {
+          "enabled": true,
+          "market": "MISX",
+          "max_positions": 2,
+          "manual_override": false
+        }
+      }
+    }
+  },
+  "strategy": {
+    "timeframes": [
+      "H4",
+      "H1",
+      "M30"
+    ],
+    "h4_role": "regime_filter",
+    "entry_timeframes": [
+      "H1",
+      "M30"
+    ],
+    "instruments": "equities_long_only_arena",
+    "max_symbols_per_account_per_scan": 33,
+    "max_market_data_429_per_scan": 3,
+    "quote_cache_ttl_seconds": 10
+  },
+  "relative_value": {
+    "enabled": true,
+    "mode": "long_only_rank_modifier",
+    "max_score_delta": 10
+  },
+  "learning": {
+    "enabled": true,
+    "mode": "propose_only",
+    "objective": "risk_adjusted_growth",
+    "horizons_minutes": [
+      60,
+      240,
+      1440,
+      4320
+    ],
+    "min_samples_for_suggestion": 20,
+    "max_score_weight_delta_per_week": 5,
+    "max_universe_rank_shift_per_week": 5,
+    "protected_hard_gates": [
+      "emergency_stop",
+      "daily_loss",
+      "account_drawdown",
+      "unresolved_order_state",
+      "missing_protective_stop",
+      "open_risk_limit",
+      "api_degradation",
+      "research_provider_failure",
+      "market_data_degraded_429",
+      "arena_stop_check_not_clear",
+      "unresolved_trade_safety_state",
+      "approval_price_revalidation_failed",
+      "approval_price_revalidation_unavailable",
+      "short_availability_not_confirmed",
+      "arena_margin_trading_not_supported",
+      "repeat_pattern_loss_cooldown",
+      "pretrade_budget_exhausted_blocks_autonomy",
+      "pretrade_event_check_unavailable",
+      "pretrade_event_check_risk"
+    ],
+    "deprioritized_score_penalty": 0,
+    "deprioritized_entry_action": "score_only",
+    "attribution_uncertain_score_penalty": 0,
+    "attribution_uncertain_entry_action": "score_only",
+    "repeat_pattern_loss": {
+      "enabled": true,
+      "account_ids": [],
+      "markets": [],
+      "scopes": [
+        {
+          "name": "DEMO-US_us",
+          "account_ids": [
+            "DEMO-US"
+          ],
+          "markets": [
+            "XNGS",
+            "XNYS",
+            "XNMS",
+            "XNCM",
+            "XASE",
+            "PINX"
+          ],
+          "side": "BUY",
+          "match_mode": "symbol_then_cluster",
+          "cluster_penalty_max_pre_score": 90
+        },
+        {
+          "name": "DEMO-RU_misx",
+          "account_ids": [
+            "DEMO-RU"
+          ],
+          "markets": [
+            "MISX"
+          ],
+          "side": "BUY",
+          "match_mode": "symbol_then_cluster",
+          "cluster_penalty_max_pre_score": 90
+        },
+        {
+          "name": "DEMO-AI_misx",
+          "account_ids": [
+            "DEMO-AI"
+          ],
+          "markets": [
+            "MISX"
+          ],
+          "side": "BUY",
+          "match_mode": "symbol_then_cluster",
+          "cluster_penalty_max_pre_score": 0
+        }
+      ],
+      "side": "BUY",
+      "exit_reasons": [
+        "EXIT_WEAK"
+      ],
+      "quick_exit_max_hold_minutes": 240,
+      "cooldown_hours": 24,
+      "penalty_trading_days": 5,
+      "score_penalty": 25
+    },
+    "last_objective": "risk_adjusted_growth",
+    "weak_exit_threshold_status": "provisional_pending_mae_samples",
+    "deprioritize_symbols": [
+      "AAPL@XNGS",
+      "LKOH@MISX",
+      "META@XNGS",
+      "GMKN@MISX",
+      "ALRS@MISX"
+    ],
+    "score_weight_delta_cap": 5,
+    "suggested_score_adjustments": {
+      "volatility_risk": 3
+    },
+    "attribution_uncertain_symbols": [
+      "MSFT@XNGS",
+      "SBER@MISX",
+      "TATN@MISX"
+    ]
+  },
+  "telegram": {
+    "pulse_max_chars": 1800,
+    "menu": [
+      "overview",
+      "account_DEMO-RU",
+      "account_DEMO-US",
+      "account_DEMO-AI",
+      "risks",
+      "strategy"
+    ]
+  },
+  "research": {
+    "enabled": true,
+    "provider": "codex_review",
+    "model": "openai-codex",
+    "h4_model": "perplexity/sonar",
+    "pretrade_model": "perplexity/sonar-pro",
+    "daily_model": "perplexity/sonar-pro",
+    "weekly_model": "perplexity/sonar-pro",
+    "h4_max_candidates": 2,
+    "h4_max_tokens": 350,
+    "h4_cache_ttl_seconds": 1800,
+    "h4_daily_request_budget": 6,
+    "pretrade_daily_request_budget": 4,
+    "daily_digest_request_budget": 1,
+    "weekly_review_request_budget": 1,
+    "arena_h4_max_symbols_per_scan": 3,
+    "arena_h4_max_symbols_per_account": 1,
+    "finam_rss_enabled": true,
+    "timeout_seconds": 70,
+    "max_candidates": 3,
+    "finam_rss_url": "https://www.finam.ru/analysis/conews/rsspoint/",
+    "failure_policy": {
+      "explicit_avoid_blocks_trade": true,
+      "research_unavailable_requires_confirmation": true
+    }
+  }
+}
