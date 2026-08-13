@@ -832,10 +832,12 @@ def main() -> int:
     _journal(args.command, output, policy_path=_journal_path)
     if args.command in {"arena-llm-context", "arena-status"} and not output.get("full_json"):
         # Diagnostic output is recursively redacted before this sink; covered by sentinel-secret tests.
-        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, separators=(",", ":")))  # codeql[py/clear-text-logging-sensitive-data]
+        # codeql[py/clear-text-logging-sensitive-data]
+        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, separators=(",", ":")))
     else:
         # Diagnostic output is recursively redacted before this sink; covered by sentinel-secret tests.
-        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, indent=2))  # codeql[py/clear-text-logging-sensitive-data]
+        # codeql[py/clear-text-logging-sensitive-data]
+        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, indent=2))
     return 0
 
 
