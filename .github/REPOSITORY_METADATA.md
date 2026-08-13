@@ -11,11 +11,11 @@
 - Website: `https://www.finam.ru/publications/item/bitva-algoritmov-zachem-treydery-testiruyut-ii-na-finam-arene-20260627-2040/`
 - About description:
 
-  > Open-source artifact of a two-month AI-trading experiment at Finam Arena: a Hermes agent with market scanning, risk controls, learning loops, and guarded execution.
+  > Герман (Herman) is an AI trading agent built on Hermes and tested for two months at Finam Arena with risk controls, learning loops, and guarded execution.
 
 - Русская альтернатива для About:
 
-  > Публичный артефакт двухмесячного эксперимента с ИИ-торговлей на конкурсе «Финам Арена»: Hermes-агент, рыночный сканер, риск-контроль и защищённое исполнение.
+  > Герман — торговый ИИ-агент на платформе Hermes и публичный артефакт двухмесячного эксперимента на конкурсе «Финам Арена».
 
 ## Topics
 
@@ -38,14 +38,15 @@ trading-bot
 
 ## Short tagline
 
-> Built in the Arena. Paper by default. Live only through explicit gates.
+> Герман — торговый ИИ-агент на Hermes. Built in the Arena. Paper by default.
 
 ## Repository introduction
 
 ### Русский вариант
 
 > Этот репозиторий вырос из двухмесячного эксперимента на конкурсе «Финам
-> Арена» 2026 года. ИИ-агент на платформе Hermes торговал виртуальным капиталом
+> Арена» 2026 года. Торгового ИИ-агента зовут Герман, а Hermes — платформа, на
+> которой он был собран. Герман торговал виртуальным капиталом
 > по реальным рыночным котировкам, а я шаг за шагом строил вокруг него систему,
 > которая должна была не столько находить сделки, сколько не давать агенту
 > действовать без проверки: рыночный сканер, торговая гипотеза, риск-контроль,
@@ -56,7 +57,8 @@ trading-bot
 ### English version
 
 > This repository grew out of a two-month experiment during the 2026 Finam
-> Arena algorithmic-trading competition. A Hermes-based AI agent operated
+> Arena algorithmic-trading competition. The trading agent is called Герман
+> (Herman), and Hermes is the platform on which it was built. Герман operated
 > virtual portfolios against real market quotes while the surrounding system
 > evolved around a deliberately unglamorous goal: prevent unchecked action.
 > Market scanning, trade hypotheses, risk controls, guarded execution, error
@@ -70,9 +72,10 @@ trading-bot
 - Release notes:
 
 ```markdown
-Initial public release of Finam Hermes Trading Bot, an unofficial experimental
+Initial public release of Герман — Finam Hermes Trading Bot, an unofficial experimental
 artifact of a two-month AI-trading experiment conducted during the 2026 Finam
-Arena competition. The system was developed around a Hermes agent operating
+Arena competition. Герман (Herman) is the trading AI agent; Hermes is the
+platform on which it was built. During the Arena, Герман operated
 virtual portfolios on real market quotes through Finam Trade API.
 
 The point of the experiment was not to build a “magic neural network.” It was
