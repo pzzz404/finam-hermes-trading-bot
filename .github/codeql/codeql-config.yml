@@ -1,0 +1,10 @@
+name: "Finam Hermes CodeQL policy"
+
+# Keep GitHub's default suite, but replace one rule with an equivalent local
+# query that knows about this repository's tested redaction boundary.
+queries:
+  - uses: ./.github/codeql/queries
+
+query-filters:
+  - exclude:
+      id: py/clear-text-logging-sensitive-data
