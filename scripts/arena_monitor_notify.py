@@ -42,9 +42,11 @@ def main() -> int:
         parser.error("Only --once mode is supported")
     output = build_arena_pulse_output(Path(args.arena_policy), dry_run=bool(args.dry_run), full_json=bool(args.full_json))
     if args.dry_run and not args.full_json:
-        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, separators=(",", ":")))
+        # Diagnostic output is recursively redacted before this sink; covered by sentinel-secret tests.
+        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, separators=(",", ":")))  # lgtm [py/clear-text-logging-sensitive-data]
     else:
-        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, indent=2))
+        # Diagnostic output is recursively redacted before this sink; covered by sentinel-secret tests.
+        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, indent=2))  # lgtm [py/clear-text-logging-sensitive-data]
     return 0 if output.get("telegram_delivery") != "failed" else 1
 
 

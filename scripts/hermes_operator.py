@@ -831,9 +831,11 @@ def main() -> int:
     _journal_path = arena_policy_path if args.command.startswith("arena-") else policy_path
     _journal(args.command, output, policy_path=_journal_path)
     if args.command in {"arena-llm-context", "arena-status"} and not output.get("full_json"):
-        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, separators=(",", ":")))
+        # Diagnostic output is recursively redacted before this sink; covered by sentinel-secret tests.
+        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, separators=(",", ":")))  # lgtm [py/clear-text-logging-sensitive-data]
     else:
-        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, indent=2))
+        # Diagnostic output is recursively redacted before this sink; covered by sentinel-secret tests.
+        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, indent=2))  # lgtm [py/clear-text-logging-sensitive-data]
     return 0
 
 
