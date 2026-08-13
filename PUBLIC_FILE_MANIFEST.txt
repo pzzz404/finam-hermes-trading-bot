@@ -1,4 +1,6 @@
 .env.example
+.github/codeql/codeql-config.yml
+.github/codeql/queries/CleartextLoggingWithRedaction.ql
 .github/REPOSITORY_METADATA.md
 .github/dependabot.yml
 .github/workflows/ci.yml

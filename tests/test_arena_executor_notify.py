@@ -1,9 +1,11 @@
 import importlib.util
+import io
 import json
 import os
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
 from pathlib import Path
 from unittest import mock
 
@@ -19,6 +21,23 @@ spec.loader.exec_module(arena_executor_notify)
 
 
 class ArenaExecutorNotifyTests(unittest.TestCase):
+    def test_cli_redacts_environment_secret_from_output(self):
+        sentinel = "arena-executor-sentinel-secret"
+        output = {"status": "FAILED", "errors": [f"request failed: {sentinel}"]}
+
+        with mock.patch.object(arena_executor_notify.hermes_operator, "_load_default_operator_env"), mock.patch.object(
+            arena_executor_notify, "build_arena_executor_alert_output", return_value=output
+        ), mock.patch.dict(os.environ, {"FINAM_ARENA_API": sentinel}, clear=False), mock.patch.object(
+            sys, "argv", ["arena_executor_notify.py", "--once", "--dry-run"]
+        ):
+            stdout = io.StringIO()
+            with redirect_stdout(stdout):
+                result = arena_executor_notify.main()
+
+        self.assertEqual(result, 1)
+        self.assertNotIn(sentinel, stdout.getvalue())
+        self.assertIn("[REDACTED]", stdout.getvalue())
+
     def setUp(self):
         self._executor_gate_patch = mock.patch.dict(
             os.environ,

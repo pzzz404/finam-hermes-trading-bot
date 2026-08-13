@@ -408,6 +408,33 @@ class HermesOperatorTests(unittest.TestCase):
         self.assertFalse(payload["safety"]["production_send"])
         write_event.assert_called_once()
 
+    def test_cli_and_journal_redact_environment_secret_from_output(self):
+        sentinel = "hermes-operator-sentinel-secret"
+        output = {
+            "status": "FAILED",
+            "command": "arena-status",
+            "errors": [f"request failed: {sentinel}"],
+            "warnings": [],
+            "safety": {"trading_mutations": False},
+        }
+
+        with mock.patch.object(hermes_operator, "load_arena_policy", return_value=self.sample_arena_policy()), mock.patch.object(
+            hermes_operator, "_arena_status_output", return_value=output
+        ), mock.patch.object(hermes_operator, "write_event") as write_event, mock.patch.dict(
+            os.environ, {"FINAM_ARENA_API": sentinel}, clear=False
+        ), mock.patch.object(
+            sys, "argv", ["hermes_operator.py", "--arena-policy", "arena.json", "arena-status"]
+        ):
+            stdout = io.StringIO()
+            with redirect_stdout(stdout):
+                result = hermes_operator.main()
+
+        self.assertEqual(result, 0)
+        self.assertNotIn(sentinel, stdout.getvalue())
+        self.assertNotIn(sentinel, json.dumps(write_event.call_args.args[0]))
+        self.assertIn("[REDACTED]", stdout.getvalue())
+
+
     def test_trade_confirm_requires_exact_confirmation_phrase(self):
         with mock.patch.object(hermes_operator, "_load_fresh_codex_review", return_value=self.sample_review()):
             output = hermes_operator._trade_confirm_output(
