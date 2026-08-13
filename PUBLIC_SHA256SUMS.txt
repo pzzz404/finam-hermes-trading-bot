@@ -1,7 +1,7 @@
 45ff0d278e167237145af65e0ac197ce06a7fa9e29fd8a272bcec24a883b489a  ./.env.example
 adbad25ae6a6a0e787b1d1c284c63b981bef9c343a082eebaee1a589ec5882c4  ./.github/codeql/codeql-config.yml
 f737a0e0bbda851e8f73a1d80ec1b5468b95b1d7c6a9a8de3db4c9f602e3c81d  ./.github/codeql/queries/CleartextLoggingWithRedaction.ql
-8b455cd58add4776a564ff23a02cb7e00481299838b493244505818e68f0c5a5  ./.github/REPOSITORY_METADATA.md
+50f5283649a43cfeddb3c6d3740c54b7464ebae84261a35bd39b8071e4f4cece  ./.github/REPOSITORY_METADATA.md
 c5d9cdc38cae054819e3ebc37071aafab3635a214628f6fa971fb74a87a9e3af  ./.github/dependabot.yml
 4dcfe703185625f314cf7044ef5ad1ebe1efa3b6b766c106531b238a9db29fb3  ./.github/workflows/ci.yml
 356054ae154d7488bd0a6d0e5127a26ef56ede5ea955cacdfb1d08d4974f279e  ./.github/workflows/codeql.yml
@@ -10,7 +10,7 @@ d8eacd6e7b21f5c1af7b28b00a4b5a95ffa1122cacd6c73e863724a53d0bd922  ./AGENTS.md
 bd7db6620e3ae617dda8fb24ea74b49b314a1400a5edbdef702c10afef9278d4  ./CONTRIBUTING.md
 eab14da867fb37cbdf0c8d085f59599c59eaa2c7237f4d9cc45c2b46a71b9785  ./LICENSE
 068189014f11c59dbb2e9022ea9ace937df69664ef3f48b52a3584424f8e7f5e  ./PUBLIC_FILE_MANIFEST.txt
-9a164450306bddaceac9adba23aeb8d897990039c31b51abc044fd47974c6b32  ./README.md
+d4a1db9db3c5784a8e6efcd02d4f1d9f00505290c4e0366c710bb281dfbcca41  ./README.md
 fb8e644ece3aedb29b6f79d1edfeb6a39d3e9fa05eff301e821a3762cb07281f  ./SECURITY.md
 cdabfb3a001d24332df8efda06c0e3ee580bd9a6bc75d5430397f553bc53a794  ./config/finam_arena_policy.json
 52c90ee9712574b298aa977778851a62ec6155bf4eaafba0222f0f6105daead0  ./config/finam_h4_policy.json
@@ -24,7 +24,7 @@ ef0cf3d075ff42d4aac5919260559f238342c83e56fcc23b5eca0d1e53be8145  ./ops/systemd/
 46eb607bbde560e9092d6bf4d59b0c10e26a43de833acdc6708ae3b5d2c6f615  ./ops/systemd/user/finam-h4-autonomous-demo.timer
 6e97f0bd5d0c2645b757a1ce9a1f464f8aebaa9edc4f662a4627ebf7f75be580  ./ops/systemd/user/finam-runtime-doctor.service
 1751e95f45ef40fbfc42873cd2ad4d99719e88d47397cc3d44ea942d4244002c  ./ops/systemd/user/finam-runtime-doctor.timer
-114421592d3789e1eb79eb29f2781aa61659e4ad3d0b0155e2fde8069784749e  ./pyproject.toml
+c496a0287e8fa50f16d6d8d986fe0bc01365b85a40f424613cdb1601e86d082a  ./pyproject.toml
 f85fe786443c3db3b7c7e8cec25d847a1f57e8526ff12769e38c97c9a714a524  ./scripts/account_snapshot.py
 70b4ecb2fdae802de8c80da29ac2db1a41d343fe6bf632a614b5153d81e92d04  ./scripts/arena_executor_notify.py
 683d60bae8c344f95d3ebc556049a97b8d6b1e6e7824902fb00f7d33ff535f92  ./scripts/arena_missed_opportunities.py

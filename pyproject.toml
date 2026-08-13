@@ -1,7 +1,7 @@
 [project]
 name = "finam-hermes-trading-bot"
 version = "0.1.0"
-description = "Public artifact of a two-month Finam Arena AI-trading experiment with risk controls and guarded execution"
+description = "Герман (Herman): an AI trading agent built on Hermes and tested for two months at Finam Arena"
 readme = "README.md"
 license = "MIT"
 authors = [{ name = "pzzz404" }]
