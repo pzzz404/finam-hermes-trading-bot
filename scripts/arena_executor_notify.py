@@ -23,6 +23,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import h4_monitor_notify  # noqa: E402
 import hermes_operator  # noqa: E402
 from finam_trading_bot.arena import load_arena_policy  # noqa: E402
+from finam_trading_bot.redaction import redact_environment_values  # noqa: E402
 
 
 DEFAULT_ARENA_POLICY_PATH = ROOT / "config" / "finam_arena_policy.json"
@@ -68,7 +69,7 @@ def main() -> int:
         execute_live=bool(args.execute_live),
         dry_run=bool(args.dry_run),
     )
-    print(json.dumps(output, ensure_ascii=False, indent=2))
+    print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, indent=2))
     return 0 if output.get("status") not in {"FAILED"} else 1
 
 
@@ -162,7 +163,7 @@ def build_arena_executor_alert_output(
                         "policy_path": str(policy_path),
                         "alert_state_path": str(alert_state_path),
                         "reason": "pretrade_alert_delivery_failed",
-                        "pretrade_alert": pretrade_alert | {"telegram_delivery": "failed", "error": str(exc)},
+                        "pretrade_alert": pretrade_alert | {"telegram_delivery": "failed", "error": redact_environment_values(exc)},
                         "telegram_delivery": "failed",
                         "safety": {"read_only": False, "trading_mutations": False, "policy_write": False},
                     }
@@ -244,7 +245,7 @@ def build_arena_executor_alert_output(
     except Exception as exc:  # noqa: BLE001 - systemd should surface delivery failures.
         output["status"] = "FAILED"
         output["telegram_delivery"] = "failed"
-        output["error"] = str(exc)
+        output["error"] = redact_environment_values(exc)
         return output
     _write_alert_state(alert_state_path, fingerprint, blocked_signature=blocked_suppression.get("signature"))
     output["telegram_delivery"] = "ok"

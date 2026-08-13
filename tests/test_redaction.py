@@ -5,7 +5,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from finam_trading_bot.redaction import redact_text, scrub  # noqa: E402
+from finam_trading_bot.redaction import redact_environment_values, redact_text, scrub  # noqa: E402
 
 
 class RedactionTests(unittest.TestCase):
@@ -37,6 +37,18 @@ class RedactionTests(unittest.TestCase):
         self.assertNotIn("REAL-123", text)
         self.assertNotIn("-100123", text)
         self.assertNotIn("123456:secret", text)
+
+    def test_redact_environment_values_masks_nested_exception_text(self):
+        sentinel = "sentinel-secret-value"
+        value = {
+            "errors": [f"request failed: Bearer {sentinel}"],
+            "nested": {"detail": RuntimeError(f"endpoint={sentinel}")},
+        }
+
+        redacted = redact_environment_values(value, env={"FINAM_ARENA_API": sentinel})
+
+        self.assertNotIn(sentinel, str(redacted))
+        self.assertIn("[REDACTED]", str(redacted))
 
 
 if __name__ == "__main__":

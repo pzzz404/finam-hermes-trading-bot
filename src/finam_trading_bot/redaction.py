@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import os
 import re
+from collections.abc import Mapping
 from typing import Any
 
 
@@ -56,4 +58,47 @@ def scrub(value: Any) -> Any:
         return redact_text(value)
     if isinstance(value, str):
         return redact_text(value)
+    return value
+
+
+def redact_environment_values(value: Any, *, env: Mapping[str, object] | None = None) -> Any:
+    """Recursively remove configured secret values from diagnostic output.
+
+    Error messages from HTTP clients occasionally reproduce a request URL or an
+    authorization value.  Redacting field names alone is not enough for those
+    free-form messages, so this helper also removes values sourced from
+    secret-shaped environment variables before stdout or journals receive them.
+    """
+
+    secret_values = _environment_secret_values(env)
+    return _redact_environment_values(value, secret_values)
+
+
+def _environment_secret_values(env: Mapping[str, object] | None) -> tuple[str, ...]:
+    source = env if env is not None else os.environ
+    values: list[str] = []
+    for key, raw in source.items():
+        key_upper = str(key).upper()
+        if not any(marker in key_upper for marker in ("TOKEN", "SECRET", "KEY", "PASSWORD", "API")):
+            continue
+        secret = str(raw or "")
+        if len(secret) >= 6 and secret not in values:
+            values.append(secret)
+    return tuple(values)
+
+
+def _redact_environment_values(value: Any, secret_values: tuple[str, ...]) -> Any:
+    if isinstance(value, dict):
+        return {key: _redact_environment_values(item, secret_values) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_redact_environment_values(item, secret_values) for item in value]
+    if isinstance(value, tuple):
+        return tuple(_redact_environment_values(item, secret_values) for item in value)
+    if isinstance(value, BaseException):
+        value = str(value)
+    if isinstance(value, str):
+        text = redact_text(value)
+        for secret in secret_values:
+            text = text.replace(secret, REDACTED)
+        return text
     return value

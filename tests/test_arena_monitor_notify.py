@@ -1,6 +1,9 @@
+import io
+import os
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
 from pathlib import Path
 from unittest import mock
 
@@ -12,6 +15,23 @@ import arena_monitor_notify
 
 
 class ArenaMonitorNotifyTests(unittest.TestCase):
+    def test_cli_redacts_environment_secret_from_output(self):
+        sentinel = "arena-monitor-sentinel-secret"
+        output = {"status": "FAILED", "telegram_delivery": "failed", "errors": [f"request failed: {sentinel}"]}
+
+        with mock.patch.object(arena_monitor_notify.hermes_operator, "_load_default_operator_env"), mock.patch.object(
+            arena_monitor_notify, "build_arena_pulse_output", return_value=output
+        ), mock.patch.dict(os.environ, {"FINAM_TOKEN": sentinel}, clear=False), mock.patch.object(
+            sys, "argv", ["arena_monitor_notify.py", "--once", "--dry-run"]
+        ):
+            stdout = io.StringIO()
+            with redirect_stdout(stdout):
+                result = arena_monitor_notify.main()
+
+        self.assertEqual(result, 1)
+        self.assertNotIn(sentinel, stdout.getvalue())
+        self.assertIn("[REDACTED]", stdout.getvalue())
+
     def test_dry_run_builds_pulse_without_sending(self):
         report = {
             "status": "OK",

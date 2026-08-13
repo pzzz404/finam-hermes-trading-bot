@@ -18,6 +18,11 @@ spec.loader.exec_module(h4_monitor)
 
 
 class H4MonitorTests(unittest.TestCase):
+    def test_decision_id_uses_sha256_prefix(self):
+        candidate = {"symbol": "SBER@MISX", "candidate_source": "static", "status": "BLOCKED", "gate_reasons": ["risk"]}
+
+        self.assertEqual(h4_monitor._decision_id(candidate), "588e0fc9b644")
+
     def test_closed_bars_excludes_current_forming_h4(self):
         bars = [
             {"time": "2026-05-21T01:00:00Z"},

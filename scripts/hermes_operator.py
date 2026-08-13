@@ -90,6 +90,7 @@ from finam_trading_bot.research import (  # noqa: E402
     weekly_review,
     write_research_artifact,
 )
+from finam_trading_bot.redaction import redact_environment_values  # noqa: E402
 from finam_trading_bot.risk import OrderProposal, RiskConfig  # noqa: E402
 
 DEMO_ACCOUNT_ID = "DEMO-ACCOUNT"
@@ -830,9 +831,9 @@ def main() -> int:
     _journal_path = arena_policy_path if args.command.startswith("arena-") else policy_path
     _journal(args.command, output, policy_path=_journal_path)
     if args.command in {"arena-llm-context", "arena-status"} and not output.get("full_json"):
-        print(json.dumps(output, ensure_ascii=False, default=str, separators=(",", ":")))
+        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, separators=(",", ":")))
     else:
-        print(json.dumps(output, ensure_ascii=False, indent=2))
+        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, indent=2))
     return 0
 
 
@@ -1820,15 +1821,7 @@ def _arena_growth_verdict(verdict: str) -> str:
 
 
 def _redact_secret_values(value: Any, *, env: Any = os.environ) -> str:
-    text = str(value or "")
-    for key, raw in getattr(env, "items", lambda: [])():
-        key_upper = str(key).upper()
-        if not any(marker in key_upper for marker in ("TOKEN", "SECRET", "KEY", "PASSWORD", "API")):
-            continue
-        secret = str(raw or "")
-        if len(secret) >= 6:
-            text = text.replace(secret, "[REDACTED]")
-    return text
+    return str(redact_environment_values(value or "", env=env))
 
 
 def _arena_growth_top_candidates(scan: dict[str, Any], *, auction: dict[str, Any], limit: int) -> list[dict[str, Any]]:
@@ -11069,13 +11062,14 @@ def _safety_payload(*, policy_write: bool = False, trading_mutations: bool = Fal
 
 
 def _journal(command: str, output: dict[str, Any], *, policy_path: Path) -> None:
-    candidates = output.get("candidates") or output.get("buy_candidates_now") or []
-    safety = output.get("safety") or {}
+    safe_output = redact_environment_values(output)
+    candidates = safe_output.get("candidates") or safe_output.get("buy_candidates_now") or []
+    safety = safe_output.get("safety") or {}
     write_event(
         {
             "command": command,
             "policy_path": str(policy_path),
-            "status": output.get("status"),
+            "status": safe_output.get("status"),
             "read_only": not bool(
                 safety.get("policy_write") or safety.get("trading_mutations") or safety.get("production_send")
             ),
@@ -11084,8 +11078,8 @@ def _journal(command: str, output: dict[str, Any], *, policy_path: Path) -> None
             "production_send": bool(safety.get("production_send")),
             "candidates_found": len(candidates) if isinstance(candidates, list) else 0,
             "gates_applied": _gate_reasons(candidates) if isinstance(candidates, list) else [],
-            "errors": output.get("errors") or [],
-            "warnings": output.get("warnings") or [],
+            "errors": safe_output.get("errors") or [],
+            "warnings": safe_output.get("warnings") or [],
         }
     )
 

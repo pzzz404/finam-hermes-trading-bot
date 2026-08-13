@@ -1719,7 +1719,7 @@ def _decision_id(candidate: dict[str, Any]) -> str:
             ",".join(str(item) for item in candidate.get("gate_reasons") or []),
         ]
     )
-    return hashlib.sha1(payload.encode("utf-8")).hexdigest()[:12]
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:12]
 
 
 def _nearest_resistance_above_current(bars: list[dict[str, Any]], current: Decimal) -> Decimal | None:

@@ -21,6 +21,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import h4_monitor_notify  # noqa: E402
 import hermes_operator  # noqa: E402
 from finam_trading_bot.arena import load_arena_policy  # noqa: E402
+from finam_trading_bot.redaction import redact_environment_values  # noqa: E402
 
 
 DEFAULT_ARENA_POLICY_PATH = ROOT / "config" / "finam_arena_policy.json"
@@ -41,9 +42,9 @@ def main() -> int:
         parser.error("Only --once mode is supported")
     output = build_arena_pulse_output(Path(args.arena_policy), dry_run=bool(args.dry_run), full_json=bool(args.full_json))
     if args.dry_run and not args.full_json:
-        print(json.dumps(output, ensure_ascii=False, separators=(",", ":")))
+        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, separators=(",", ":")))
     else:
-        print(json.dumps(output, ensure_ascii=False, indent=2))
+        print(json.dumps(redact_environment_values(output), ensure_ascii=False, default=str, indent=2))
     return 0 if output.get("telegram_delivery") != "failed" else 1
 
 
@@ -96,7 +97,7 @@ def build_arena_pulse_output(policy_path: Path, *, dry_run: bool, full_json: boo
         h4_monitor_notify.send_telegram_message(text, reply_markup=markup)
     except Exception as exc:  # noqa: BLE001 - systemd should surface delivery failures.
         output["telegram_delivery"] = "failed"
-        output["error"] = str(exc)
+        output["error"] = redact_environment_values(exc)
         return output
     output["telegram_delivery"] = "ok"
     return output
