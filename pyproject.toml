@@ -18,7 +18,7 @@ finam-trading-bot = "finam_trading_bot.__main__:main"
 
 [project.optional-dependencies]
 charts = [
-    "Pillow>=10,<13",
+    "Pillow>=10,<14",
 ]
 dev = [
     "pytest>=9.0.3,<10",
